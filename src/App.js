@@ -4,7 +4,7 @@ import HomePage from "./pages/HomePage";
 import CartPage from "./pages/CartPage";
 import ProductPage from "./pages/ProductPage";
 import { Provider } from "react-redux";
-import { store } from "store";
+import store from "store";
 
 // Provider 하위 컴포넌트에 store의 state를 제공
 function App() {
