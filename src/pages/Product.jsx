@@ -9,12 +9,13 @@ import { setCart } from "actions/cartActions";
 export const Product = ({ product, ...rest }) => {
   const navigate = useNavigate();
   // Redux 상태에서 cart 가져오는 방법, useSelector 훅 사용
-  const cart = useSelector((state) => state.cart); 
-	// Action을 파라미터로 전달하고, Reducer를 실행하는 역할
+  const cart = useSelector((state) => state.cart || []); // cart가 undefined일 경우 빈 배열로 초기화
+  // Action을 파라미터로 전달하고, Reducer를 실행하는 역할
   const dispatch = useDispatch();
 
   const handleCart = (product) => {
-    if (cart.find((item) => item.id === product.id)) {
+    // cart가 배열인지 확인한 후 find 메서드 사용
+    if (cart && cart.find((item) => item.id === product.id)) {
       alert("이미 장바구니에 추가된 상품입니다.");
       return;
     }
@@ -57,6 +58,7 @@ const Item = styled.div`
   padding: 16px;
   cursor: pointer;
 `;
+
 const Name = styled.div`
   font-family: "Pretendard Variable", sans-serif;
   font-size: 20px;
@@ -75,6 +77,7 @@ const Name = styled.div`
   background-repeat: no-repeat;
   background-position: 0 100%; /* Bottom alignment */
 `;
+
 const Description = styled.div`
   font-family: "Pretendard Variable", sans-serif;
   font-size: 15px;

@@ -9,12 +9,13 @@ import { setCart } from "actions/cartActions";
 
 function ProductPage() {
   const { id } = useParams();
-  const product = PRODUCTS[parseInt(id)];
-  const cart = useSelector((state) => state.cart); // Redux 상태에서 cart 가져오기
+  const product = PRODUCTS[parseInt(id)]; // 제품 ID를 정수로 변환하여 사용
+  const cart = useSelector((state) => state.cart || []); // Redux 상태에서 cart 가져오기, cart가 undefined인 경우 빈 배열로 초기화
   const dispatch = useDispatch();
 
   const handleCart = (product) => {
-    if (cart.find((item) => item.id === product.id)) {
+    // cart가 배열인지 확인한 후 find 메서드 사용
+    if (cart && cart.find((item) => item.id === product.id)) {
       alert("이미 장바구니에 추가된 상품입니다.");
       return;
     }
